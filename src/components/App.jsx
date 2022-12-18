@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { useState } from "react";
 import Section from "./section";
 import Contacts from "./contacts";
 import Form from "./form";
@@ -13,6 +14,8 @@ export class App extends Component {
   contacts: [],
   filter: '',
   }
+
+  // const [contact, setContacts] = useState([])
 
   componentDidMount() {
     try {
