@@ -1,18 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Section from "./section";
 import Contacts from "./contacts";
-
 import Form from "./form";
 import Filter from './filter'
 import { nanoid } from 'nanoid';
 import { Notify } from 'notiflix/build/notiflix-notify-aio'
-
 import style from "./contacts/contacts.module.scss";
-
 
 export const App = () => {
   const [contacts, setContacts] = useState([]);
   const [filter, setFilter] = useState('');
+
+ 
+  const filteredContatcs = () => {
+    
+  }
+  
+  // const filteredContatcs = () => {
+  //   const names = contacts.map(c => c.name);
+
+  //   const normalizedFilter = filter.toLowerCase();
+  //   setContacts(contacts.filter(contact =>
+  //   contact.name.toLowerCase().includes(normalizedFilter)))
+  // }
+ 
 
   const formSubmitHandle = ({name, number}) => {
     const newContact = {
@@ -30,40 +41,50 @@ export const App = () => {
   }
   
   const changeFilter = (e) => {
-      setFilter(e.currentTarget.value)
+    setFilter(e.currentTarget.value);
+    getVisibleContatcts()
   };
 
-    const deliteContact = contactId => {
-    this.setState(prevState => ({
-      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
-    }));
-  };
-  
-  
+  const getVisibleContatcts = () => {
+    const normalizedFilter = filter.toLowerCase();
+
+    contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
+
+  }
+
+
+
+  const deliteContact = contactId => {
+    setContacts(contacts.filter(contact => contact.id !== contactId));
+   
+  }
+ 
   return (
       <Section title='Phonebook'>
         <Form
         onSubmitHandle={formSubmitHandle}
       />
         
-        {/* {contacts.length === 0 ? (
+        {contacts.length === 0 ? (
           <div className={style.contacts__emty}>
             <h2>Missing contacts</h2>
           </div>) : (
           <Contacts
           title='Contacts'
-         
-          // contacts={visibleContacts}
-            // onDeliteContact={this.deliteContact}
+          contacts={contacts}
+          onDeliteContact={deliteContact}
           >
           
-            <Filter value={filter}
-              // onChange={this.changeFilter}
+            <Filter
+              value={filter}
+              changeFilter={changeFilter}
             />
            
           
         </Contacts>)
-          } */}
+          }
         
       </Section>
     );

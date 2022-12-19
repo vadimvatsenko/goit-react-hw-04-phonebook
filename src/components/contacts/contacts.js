@@ -12,7 +12,8 @@ export default function Contacts({ title, contacts, onDeliteContact, children })
             {children}
             <div className={style.contacts__wrap}>
            
-                <ul className={style.contacts__list}>
+                <ul
+                    className={style.contacts__list}>
                     {contacts.map(({ id, name, number }) => (
                         <li key={id} className={style.contacts__item}>
                             <p>{name}</p>

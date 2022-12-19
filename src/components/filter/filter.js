@@ -7,16 +7,26 @@ import PropTypes from 'prop-types';
 
 const idForFilter = nanoid();
 
-export default function Filter({value, onChange}) {
+export default function Filter({ value, changeFilter }) {
     return (
         <form className={style.filter__form}> 
-            <label htmlFor={idForFilter} className={style.filter__title}>Find contact by name</label>
-            <input className={style.filter__input } id={ idForFilter} type="text" name="filter" value={value} onChange={onChange } />
+            <label
+                htmlFor={idForFilter}
+                className={style.filter__title}>
+                Find contact by name
+            </label>
+            <input
+                className={style.filter__input}
+                id={idForFilter}
+                type="text"
+                name="filter"
+                value={value}
+                onChange={changeFilter} />
         </form>
     )
 }
 
-Filter.propTypes = {
-    value: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired
-}
+// Filter.propTypes = {
+//     value: PropTypes.string.isRequired,
+//     onChange: PropTypes.func.isRequired
+// }
