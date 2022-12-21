@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Section from "./section";
 import Contacts from "./contacts";
-import Form from "./form";
+import {Form} from "./form/form";
 import Filter from './filter'
 import { nanoid } from 'nanoid';
 import { Notify } from 'notiflix/build/notiflix-notify-aio'
@@ -19,7 +19,7 @@ export const App = () => {
     window.localStorage.setItem('contacts', JSON.stringify(contacts))
   },[contacts])
 
-  const formSubmitHandle = ({name, number}) => {
+  const formSubmitHandle = (name, number) => {
     const newContact = {
       id: nanoid(),
       name,
