@@ -1,20 +1,11 @@
 //DONE
-import { useState, useEffect } from 'react';
 import style from './form.module.scss'
 import { nanoid } from 'nanoid';
 import PropTypes from "prop-types";
+import { useLocalStorage } from 'hooks/useLocalStorage';
 
 //катомный хук для localStorage
-const useLocalStorage = (key, defaultValue) => {
-    const [state, setState] = useState(() => {
-        return JSON.parse(window.localStorage.getItem(key)) ?? defaultValue;
-    });
 
-    useEffect(() => {
-        window.localStorage.setItem(key, JSON.stringify(state));
-    }, [key, state]);
-    return [state, setState]
-}
 
 const Form = ({ onSubmitHandle }) => {
     const [name, setName] = useLocalStorage('name', '');
