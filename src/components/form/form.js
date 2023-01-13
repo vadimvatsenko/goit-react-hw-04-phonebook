@@ -4,14 +4,9 @@ import { nanoid } from 'nanoid';
 import PropTypes from "prop-types";
 import { useLocalStorage } from 'hooks/useLocalStorage';
 
-//катомный хук для localStorage
-
-
-const Form = ({ onSubmitHandle }) => {
+export default function Form({ onSubmitHandle }) {
     const [name, setName] = useLocalStorage('name', '');
     const [number, setNumber] = useLocalStorage('number', '');
-    // const [name, setName] = useState('');
-    // const [number, ] = useState('');
 
     const nameInputId = nanoid();
     const numberInputId = nanoid();
@@ -19,6 +14,8 @@ const Form = ({ onSubmitHandle }) => {
     const handleChange = (e) => {
         const { name, value } = e.currentTarget;
         if (name === 'name') {
+
+
             setName(value);
         }
         if (name === 'number') {
@@ -29,20 +26,23 @@ const Form = ({ onSubmitHandle }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        onSubmitHandle(name, number);
+        
+        const lowerName = e.target.name.value.toLowerCase();
+        const resultName = lowerName.split(/\s+/).map(word => word[0].toUpperCase() + word.substring(1)).join(' ');
+        onSubmitHandle(resultName, number);
         resetForm();
-    }
 
-    const resetForm = () => {
-        setNumber('');
-        setName('');
+ 
     }
+    const resetForm = () => {
+            setNumber('');
+            setName('');
+        }
 
 
     return (
         <form className={style.form__section}
-        onSubmit={handleSubmit}
+            onSubmit={handleSubmit}
         >
             <label className={style.label__header} htmlFor={nameInputId}>Name</label>
             <input
@@ -56,8 +56,8 @@ const Form = ({ onSubmitHandle }) => {
                 title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
                 required
             />
-            <label  className={style.label__header}
-                    htmlFor={numberInputId}>Number</label>
+            <label className={style.label__header}
+                htmlFor={numberInputId}>Number</label>
             <input
                 onChange={handleChange}
                 className={style.label__input}
@@ -80,12 +80,13 @@ const Form = ({ onSubmitHandle }) => {
     );
 
 
-}
+    }
+
 
 Form.propTypes = {
   onSubmitHandle: PropTypes.func.isRequired,
   
 };
 
-export {Form}
+
 

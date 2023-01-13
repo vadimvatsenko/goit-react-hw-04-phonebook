@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Section from "./section";
 import Contacts from "./contacts";
-import {Form} from "./form/form";
+import Form from "./form/form";
 import Filter from './filter'
 import { nanoid } from 'nanoid';
 import { Notify } from 'notiflix/build/notiflix-notify-aio'
